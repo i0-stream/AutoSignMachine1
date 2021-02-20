@@ -205,16 +205,29 @@ var start = async (params) => {
   }, taskOption)
 
 
-  // 首页-牛气-场馆领牛气
-  await scheduler.regTask('NiujieReceiveCalf', async (request) => {
-    await require('./Niujie').receiveCalf(request, options)
-  }, {
-    isCircle: true,
-    intervalTime: 1 * 3600,
-    startTime: 1,
-    ...taskOption
-  })
-}
+// 首页-牛气-场馆领牛气
+  await scheduler.regTask(
+    "NiujieReceiveCalf",
+    async (request) => {
+      await require("./Niujie").receiveCalf(request, options);
+    },
+    {
+      isCircle: true,
+      intervalTime: 1 * 3600,
+      startTime: 1,
+      ...taskOption,
+    }
+  );
+
+  //首页-签到有礼-聚宝盆 [广告图]
+  await scheduler.regTask(
+    "ingots",
+    async (request) => {
+      await require("./ingotsPage").doTask(request, options);
+    },
+    taskOption
+  );
+};
 module.exports = {
-  start
-}
+  start,
+};
